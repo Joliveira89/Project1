@@ -1,0 +1,37 @@
+.background
+{
+	background-color: black;
+}
+
+.container
+{
+	background: black;
+}
+.jumbotron
+{	
+	margin:20px;
+	background-color: red;
+	height: 200px;
+}
+#mainsectionarea
+{
+	background-color: grey;
+	
+	padding:20px;
+}
+#movieinfosection
+{
+	background-color: white;
+}
+#likebutton
+{
+	height:30px;
+	margin:10px;
+}
+.footer
+{
+	background-color: red;
+	margin:20px;
+	color:white;
+	text-align: center;
+}
