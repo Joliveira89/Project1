@@ -6,6 +6,6 @@ $(document).ready(function () {
     // userPassword = $("#userPassword").val().trim();
     // dob = $("#dob").val().trim();
 
-    age = moment("05/03/1982", "MM/DD/YYYY").month(0).from(moment().month(0));
-    console.log(age);
+    age = parseInt(moment("05/03/1982", "MM/DD/YYYY").month(0).from(moment().month(0)).split(" ")[0]);
+    console.log(typeof age);
 });
