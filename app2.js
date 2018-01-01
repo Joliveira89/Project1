@@ -6,7 +6,7 @@ function returnMovie() {
   var queryURLBase = "https://www.omdbapi.com/?t=" + searchTerm + "&apikey=" + omdbKey;
 
   $("#postersection").empty();
-  $("#movieinfosection").empty();
+  $("#movieinfosection").empty();  
 
   $.ajax({
     url: queryURLBase,
