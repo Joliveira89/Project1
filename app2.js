@@ -6,7 +6,7 @@ function returnMovie() {
   var queryURLBase = "https://www.omdbapi.com/?t=" + searchTerm + "&apikey=" + omdbKey;
 
   $("#postersection").empty();
-  $("#movieinfosection").empty();
+  $("#movieinfosection").empty();  
 
   $.ajax({
     url: queryURLBase,
@@ -45,3 +45,5 @@ function returnMovie() {
 $(document).on("click", ".input-group-addon", returnMovie);
 
 // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
+
+//Testing git push by Baraka.
