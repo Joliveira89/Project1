@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // alert('foo');
+    //Instantiate variables for the user object:
     var userName, dob, age, userEmail, userPassword;
 
     // Initialize Firebase
@@ -55,6 +55,4 @@ $(document).ready(function () {
         userAge = parseInt(moment(usersData.userDOB, "MM/DD/YYYY").month(0).from(moment().month(0)).split(" ")[0]);
         console.log(userAge);
     });
-    
-
 });
