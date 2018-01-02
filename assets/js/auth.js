@@ -69,7 +69,7 @@ $(document).ready(function () {
                                 if (childSnapshot.val().age >= 18) {
                                     console.log("The user is over 18");
                                     // $(".jumbotron, .mainsectionarea").removeClass("hide");
-                                    $("#current-user-age").text(childSnapshot.val().age);
+                                    //$("#current-user-age").text(childSnapshot.val().age);
                                     $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
                                 } else {
                                     console.log("The user is NOT 18 yet");
