@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    $(".container").css({"background": "white","margin-top": "50px"});
+    $(".background").css("background", "#fafafa");
     //Instantiate variables for the user object:
     var userName, dob, age, userEmail, userPassword;
 
@@ -58,13 +61,20 @@ $(document).ready(function () {
                         currentUserEmail = currentUser.email;
                         //Get the user email from the database
                         database.ref().on("child_added", function (childSnapshot) {
-                            console.log(childSnapshot.val());
+                            //console.log(childSnapshot.val());
+                            //Show the search bar and the result section:
+                            $(".jumbotron, #mainsectionarea").removeClass("hide");
 
                             if (childSnapshot.val().email === currentUserEmail) {
                                 if (childSnapshot.val().age >= 18) {
                                     console.log("The user is over 18");
+                                    // $(".jumbotron, .mainsectionarea").removeClass("hide");
+                                    //$("#current-user-age").text(childSnapshot.val().age);
+                                    $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
                                 } else {
                                     console.log("The user is NOT 18 yet");
+                                    //Add the 'current-user-age' attribute to the span, to be used when the user searches for movies in the app2.js
+                                    $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
                                 }
                             }
                         });
@@ -131,13 +141,15 @@ $(document).ready(function () {
                     btnLogout.addClass("hide");
                     btnSignUp.removeClass("hide");
                 }
+                //Only after a user is able to sign up, clear the input fields.
+                $(".form-control").val("");
             })
             .catch(function (e) {
                 console.log("FIREBASE MESSAGE: " + e.message);
                 console.log("MY MESSAGE: There was an error signing up the user- SECOND ERROR!");
             });
 
-        $(".form-control").val("");
+        
 
     });
 
@@ -148,13 +160,16 @@ $(document).ready(function () {
         btnLogout.addClass("hide");
         btnSignUp.removeClass("hide");
         firebase.auth().signOut();
+        $(".jumbotron, #mainsectionarea").addClass("hide");
+        $("#postersection").empty();
+        $("#movieinfosection").empty(); 
     });
 
     // //Add a realtime listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if (firebaseUser) {
             //Inform that the user is logged in:
-            console.log("The user is CURRENTLY logged in");
+            //console.log("The user is CURRENTLY logged in");
             var currentUser = firebase.auth().currentUser;
             var currentUserEmail;
             //Check if we have a user
@@ -163,27 +178,29 @@ $(document).ready(function () {
                 currentUserEmail = currentUser.email;
                 //Get the user email from the database
                 database.ref().on("child_added", function (childSnapshot) {
-                    console.log(childSnapshot.val());
+                    //console.log(childSnapshot.val());
 
                     if (childSnapshot.val().email === currentUserEmail) {
                         if (childSnapshot.val().age >= 18) {
-                            console.log("The user is over 18");
+                            console.log("The user is LOGGED IN and is over 18");
+
                         } else {
-                            console.log("The user is NOT 18 yet");
+                            console.log("The user is LOGGED IN and is NOT 18 yet");
                         }
                     }
                 });
-                console.log("CURRENT USER'S EMAIL ADDRESS IS: " + currentUserEmail);
+                //console.log("CURRENT USER'S EMAIL ADDRESS IS: " + currentUserEmail);
+                //$("h2").text("You are currently logged in as: " + childSnapshot.val().email);
             }
             //Remove the hidden class from the input
             btnLogout.removeClass("hide");
             btnSignUp.addClass("hide");
         } else {
-            console.log("The user is not logged in");
-            //btnLogout.addClass("hide");
-            //btnSignUp.removeClass("hide");
+            console.log("The user is not logged in, showing Login or Logout Section");
         }
     });
+
+    
 
 
 
