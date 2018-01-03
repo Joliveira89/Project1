@@ -80,7 +80,7 @@ function returnMovie() {
         $("#postersection").empty();
       }
     }
-    $("#movieinfosection").append(pFive);
+    // $("#movieinfosection").append(pFive);
     console.log(response);
     console.log(video);
   })
