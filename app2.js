@@ -24,13 +24,12 @@ function returnMovie() {
     rating = response.Rated;
     var pFour = $("<p>").text("Rating: " + rating);
 
-    //Run the checkAgeFirst()
-    //checkAgeFirst();
+    //Check Age:
     //1. First, we check if the movie is not rated R
     if (rating != "R"){
       //If not, we show everything
-      $("#postersection").append(pOne);
       $("#movieinfosection").empty();
+      $("#postersection").append(pOne);
       $("#movieinfosection").append(pTwo);
       $("#movieinfosection").append(pThree);
       $("#movieinfosection").append(pFour);
@@ -38,8 +37,8 @@ function returnMovie() {
       //2. If it is rated R, we check the age of the user. If the user is 18 or older:
       if (currentUserAge >= 18) {
         //We show everything else
-        $("#postersection").append(pOne);
         $("#movieinfosection").empty();
+        $("#postersection").append(pOne);
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
@@ -47,7 +46,7 @@ function returnMovie() {
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.");
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep ");
         $("#postersection").empty();
       }
     }
@@ -76,7 +75,7 @@ function returnMovie() {
         //Else, we show a modal: TODO//Create a modal and replace with console
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.");
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");
         $("#postersection").empty();
       }
     }
@@ -87,6 +86,7 @@ function returnMovie() {
 }
 
 function randomMovie() {
+  var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
 
   $("#postersection").empty();
   $("#movieinfosection").empty();
@@ -106,12 +106,38 @@ function randomMovie() {
     var pTwo = $("<p>").text("Actors: " + actors);
     var runtime = response.Runtime;
     var pThree = $("<p>").text("Runtime: " + runtime);
-    var rating = response.Rated;
-    var pFour = $("<p>").text("Rating: " + rating);
-    $("#postersection").append(pOne);
-    $("#movieinfosection").append(pTwo);
-    $("#movieinfosection").append(pThree);
-    $("#movieinfosection").append(pFour);
+    randomMovieRating = response.Rated;
+    var pFour = $("<p>").text("Rating: " + randomMovieRating);
+    //Check Age:
+    //1. First, we check if the movie is not rated R
+    if (randomMovieRating != "R") {
+      //If not, we show everything
+      $("#movieinfosection").empty();
+      $("#postersection").append(pOne);      
+      $("#movieinfosection").append(pTwo);
+      $("#movieinfosection").append(pThree);
+      $("#movieinfosection").append(pFour);
+    } else {
+      //2. If it is rated R, we check the age of the user. If the user is 18 or older:
+      if (currentUserAge >= 18) {
+        //We show everything else
+        $("#movieinfosection").empty();
+        $("#postersection").append(pOne);
+        $("#movieinfosection").append(pTwo);
+        $("#movieinfosection").append(pThree);
+        $("#movieinfosection").append(pFour);
+      } else {
+        //Else, we show a modal: TODO//Create a modal and replace with console.log
+        console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
+        $("#movieinfosection").empty();
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");
+        $("#postersection").empty();
+      }
+    }
+    // $("#postersection").append(pOne);
+    // $("#movieinfosection").append(pTwo);
+    // $("#movieinfosection").append(pThree);
+    // $("#movieinfosection").append(pFour);
   })
 
 
@@ -123,7 +149,24 @@ function randomMovie() {
   }).done(function(response) {
     var video = "https://www.youtube.com/embed/" + response.items[0].id.videoId;
     var pFive = $("<iframe>").attr("src", video);
-    $("#movieinfosection").append(pFive);
+    //1. First, we check if the movie is not rated R
+    if (randomMovieRating != "R") {
+      //If not, we show everything
+      $("#postersection").append(pFive);
+    } else {
+      //2. If it is rated R, we check the age of the user. If the user is 18 or older:
+      if (currentUserAge >= 18) {
+        //We show everything else
+        $("#postersection").append(pFive);
+      } else {
+        //Else, we show a modal: TODO//Create a modal and replace with console
+        console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
+        $("#movieinfosection").empty();
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
+        $("#postersection").empty();
+      }
+    }
+    //$("#movieinfosection").append(pFive);
     console.log(response);
   })
 }
