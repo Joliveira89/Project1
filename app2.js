@@ -1,15 +1,18 @@
 var omdbKey = "f2ddb033";
 
 function returnMovie() {
+  // Grab the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
-
+  // Grab the search term:
   var searchTerm = $("#userinputsearch").val().trim();
+  // Create the query:
   var queryURLBase = "https://www.omdbapi.com/?t=" + searchTerm + "&apikey=" + omdbKey;
 
-
+  // Empty movie and poster sections:
   $("#movieinfosection").empty();
   $("#postersection").empty();
 
+  // Do an ajax call to the Open Movie Database API using the search term above:
   $.ajax({
     url: queryURLBase,
     method: "GET"
@@ -46,8 +49,8 @@ function returnMovie() {
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep ");
         $("#postersection").empty();
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep ");        
       }
     }
 
@@ -75,15 +78,14 @@ function returnMovie() {
         //Else, we show a modal: TODO//Create a modal and replace with console
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");
         $("#postersection").empty();
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");        
       }
-    }
-    // $("#movieinfosection").append(pFive);
+    };
     console.log(response);
     console.log(video);
   })
-}
+};
 
 function randomMovie() {
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
@@ -130,16 +132,11 @@ function randomMovie() {
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");
         $("#postersection").empty();
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");        
       }
     }
-    // $("#postersection").append(pOne);
-    // $("#movieinfosection").append(pTwo);
-    // $("#movieinfosection").append(pThree);
-    // $("#movieinfosection").append(pFour);
-  })
-
+  });
 
   var queryURLYoutube = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80&maxResults=1&q=" + movieList[imdbTop] + " trailer";
 
@@ -162,11 +159,11 @@ function randomMovie() {
         //Else, we show a modal: TODO//Create a modal and replace with console
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
         $("#postersection").empty();
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
+        
       }
     }
-    //$("#movieinfosection").append(pFive);
     console.log(response);
   })
 }
