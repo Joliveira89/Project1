@@ -3,6 +3,7 @@ var omdbKey = "f2ddb033";
 function returnMovie() {
   // Grab the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
+  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
   // Grab the search term:
   var searchTerm = $("#userinputsearch").val().trim();
   // Create the query:
@@ -87,15 +88,19 @@ function returnMovie() {
   })
 };
 
+var randomMovieName;
+
 function randomMovie() {
+  // Get the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
+  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
 
   $("#postersection").empty();
   $("#movieinfosection").empty();
 
   var imdbTop = Math.floor(Math.random() * 247);
   console.log(movieList[imdbTop]);
-  var queryURLBase = "https://www.omdbapi.com/?t=" + movieList[imdbTop] + "&apikey=" + omdbKey;
+  var queryURLBase = "https://www.omdbapi.com/?t=" + movieList[imdbTop] + "&apikey=" + omdbKey; 
 
   $.ajax({
     url: queryURLBase,
@@ -110,11 +115,13 @@ function randomMovie() {
     var pThree = $("<p>").text("Runtime: " + runtime);
     randomMovieRating = response.Rated;
     var pFour = $("<p>").text("Rating: " + randomMovieRating);
+    randomMovieName = response.Title;
     //Check Age:
     //1. First, we check if the movie is not rated R
     if (randomMovieRating != "R") {
       //If not, we show everything
       $("#movieinfosection").empty();
+      // $("#movieinfosection").append($("<p id='title'>").text("Title: " + response.Title));
       $("#postersection").append(pOne);      
       $("#movieinfosection").append(pTwo);
       $("#movieinfosection").append(pThree);
@@ -124,6 +131,7 @@ function randomMovie() {
       if (currentUserAge >= 18) {
         //We show everything else
         $("#movieinfosection").empty();
+        // $("#movieinfosection").append($("<p id='title'>").text("Title: " + response.Title));
         $("#postersection").append(pOne);
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
@@ -165,7 +173,18 @@ function randomMovie() {
       }
     }
     console.log(response);
-  })
+  });
+
+  // Save Movie Title to Firebase based on like or dislike
+  //Get the id of the clicked button:
+  var clickedButton = this.id;
+  //alert(movieName);
+  if (clickedButton === "likebutton") {
+    console.log(`You liked ${randomMovieName}`);
+  } else {
+    console.log(`You DISLIKED ${randomMovieName}`);
+  }
+  
 }
 
 $(document).on("click", ".input-group-addon", returnMovie);
@@ -174,6 +193,7 @@ $(document).on("click", ".input-group-addon", returnMovie);
 
 //Testing Area for Baraka
 $(document).on("click", "#dislikebutton", randomMovie);
+$(document).on("click", "#likebutton", randomMovie);
 // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
 
 var movieList = ["The Shawshank Redemption",
