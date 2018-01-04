@@ -3,7 +3,7 @@ var omdbKey = "f2ddb033";
 function returnMovie() {
   // Grab the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
-  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
+  var currentUserEmail = $("#current-user-email").attr("current-user-email");
   // Grab the search term:
   var searchTerm = $("#userinputsearch").val().trim();
   // Create the query:
@@ -93,7 +93,7 @@ var randomMovieName;
 function randomMovie() {
   // Get the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
-  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
+  var currentUserEmail = $("#current-user-email").attr("current-user-email");
 
   $("#postersection").empty();
   $("#movieinfosection").empty();
@@ -180,7 +180,7 @@ function randomMovie() {
   var clickedButton = this.id;
   //alert(movieName);
   if (clickedButton === "likebutton") {
-    console.log(`You liked ${randomMovieName}`);
+    console.log(`You liked ${randomMovieName}`);    
   } else {
     console.log(`You DISLIKED ${randomMovieName}`);
   }
