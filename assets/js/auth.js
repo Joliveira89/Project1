@@ -186,9 +186,13 @@ $(document).ready(function () {
                     if (childSnapshot.val().email === currentUserEmail) {
                         if (childSnapshot.val().age >= 18) {
                             //console.log("The user is LOGGED IN and is over 18");
+                            $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
+                            $("#email").text(childSnapshot.val().email);
 
                         } else {
                             //console.log("The user is LOGGED IN and is NOT 18 yet");
+                            $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
+                            $("#email").text(childSnapshot.val().email);
                         }
                     }
                 });
