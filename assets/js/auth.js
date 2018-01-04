@@ -71,10 +71,12 @@ $(document).ready(function () {
                                     // $(".jumbotron, .mainsectionarea").removeClass("hide");
                                     //$("#current-user-age").text(childSnapshot.val().age);
                                     $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
+                                    $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
                                 } else {
                                     console.log("The user is NOT 18 yet");
                                     //Add the 'current-user-age' attribute to the span, to be used when the user searches for movies in the app2.js
                                     $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
+                                    $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
                                 }
                             }
                         });
