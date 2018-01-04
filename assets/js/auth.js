@@ -105,7 +105,7 @@ $(document).ready(function () {
     btnSignUp.click(e => {
         
 
-        //console.log("Sign Up Button Clicked");
+        // console.log("Sign Up Button Clicked");
 
         //Get values
         const email = txtEmail.val();
@@ -134,6 +134,7 @@ $(document).ready(function () {
                         email: email,
                         age: parseInt(age)
                     });
+                    console.log('Data added to database');
 
                     // Get the user's Age
 
@@ -184,10 +185,10 @@ $(document).ready(function () {
 
                     if (childSnapshot.val().email === currentUserEmail) {
                         if (childSnapshot.val().age >= 18) {
-                            console.log("The user is LOGGED IN and is over 18");
+                            //console.log("The user is LOGGED IN and is over 18");
 
                         } else {
-                            console.log("The user is LOGGED IN and is NOT 18 yet");
+                            //console.log("The user is LOGGED IN and is NOT 18 yet");
                         }
                     }
                 });

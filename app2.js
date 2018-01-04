@@ -1,4 +1,17 @@
-var omdbKey = "f2ddb033";
+
+$(document).ready(function() {
+
+var omdbKey = "f2ddb033";  
+
+var likedMoviesArray = [];
+var dislikedMoviesArray = [];
+
+  // Create a database
+  var database = firebase.database();
+  database.ref().on("value", function (snap) {
+    likedMoviesArray = snap.val().likedMovies;
+    dislikedMoviesArray = snap.val().dislikedMovies;
+  });
 
 function returnMovie() {
   // Grab the current user's age:
@@ -18,7 +31,7 @@ function returnMovie() {
     url: queryURLBase,
     method: "GET"
   }).done(function(response) {
-    console.log(response);
+    //console.log(response);
     var poster = response.Poster;
     var pOne = $("<img>").attr("src", poster);
     var actors = response.Actors;
@@ -77,23 +90,29 @@ function returnMovie() {
         $("#postersection").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console
-        console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
+        //console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");        
       }
     };
-    console.log(response);
-    console.log(video);
+    //console.log(response);
+    //console.log(video);
   })
 };
 
 var randomMovieName;
+if (randomMovieName == undefined) {
+  randomMovieName = '';
+}
+var dislikedMoviesArray;
+var likedMoviesArray;
 
 function randomMovie() {
   // Get the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
   var currentUserEmail = $("#current-user-email").attr("current-user-email");
+  
 
   $("#postersection").empty();
   $("#movieinfosection").empty();
@@ -106,7 +125,7 @@ function randomMovie() {
     url: queryURLBase,
     method: "GET"
   }).done(function(response) {
-    console.log(response);
+    //console.log(response);
     var poster = response.Poster;
     var pOne = $("<img>").attr("src", poster);
     var actors = response.Actors;
@@ -138,7 +157,7 @@ function randomMovie() {
         $("#movieinfosection").append(pFour);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console.log
-        console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
+        //console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");        
@@ -165,24 +184,33 @@ function randomMovie() {
         $("#postersection").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console
-        console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
+        //console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
         
       }
     }
-    console.log(response);
+    //console.log(response);
   });
 
   // Save Movie Title to Firebase based on like or dislike
   //Get the id of the clicked button:
-  var clickedButton = this.id;
+  var clickedButton = this.id;  
   //alert(movieName);
   if (clickedButton === "likebutton") {
-    console.log(`You liked ${randomMovieName}`);    
-  } else {
+    console.log(`You liked ${randomMovieName}`);
+    console.log("The current email is " + currentUserEmail);    
+    database = firebase.database();        
+    likedMoviesArray.push(randomMovieName);
+    database.ref().update({ "likedMovies": likedMoviesArray});    
+  }
+
+  if (clickedButton === "dislikebutton") {
     console.log(`You DISLIKED ${randomMovieName}`);
+    database = firebase.database();
+    dislikedMoviesArray.push(randomMovieName);
+    database.ref().update({ "dislikedMovies": dislikedMoviesArray}); 
   }
   
 }
@@ -445,3 +473,5 @@ var movieList = ["The Shawshank Redemption",
 "Three Colors: Red",
 "The Mirror",
 "Pirates of the Caribbean: The Curse of the Black Pearl"];
+
+})
