@@ -34,6 +34,8 @@ function returnMovie() {
     var pThree = $("<p>").text("Runtime: " + runtime);
     rating = response.Rated;
     var pFour = $("<p>").text("Rating: " + rating);
+    var plot = response.Plot;
+    var pFive = $("<p>").text("Plot: " + plot);
 
     //Check Age:
     //1. First, we check if the movie is not rated R
@@ -44,6 +46,7 @@ function returnMovie() {
       $("#movieinfosection").append(pTwo);
       $("#movieinfosection").append(pThree);
       $("#movieinfosection").append(pFour);
+      $("#movieinfosection").append(pFive);
     }else{
       //2. If it is rated R, we check the age of the user. If the user is 18 or older:
       if (currentUserAge >= 18) {
@@ -53,6 +56,7 @@ function returnMovie() {
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
+        $("#movieinfosection").append(pFive);
       }else{
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
@@ -130,10 +134,13 @@ function randomMovie() {
     var pThree = $("<p>").text("Runtime: " + runtime);
     rating = response.Rated;
     var pFour = $("<p>").text("Rating: " + rating);
+    var plot = response.Plot;
+    var pFive = $("<p>").text("Plot: " + plot);
     $("#postersection").append(pOne);
     $("#movieinfosection").append(pTwo);
     $("#movieinfosection").append(pThree);
     $("#movieinfosection").append(pFour);
+    $("#movieinfosection").append(pFive);
 
 
     randomMovieRating = response.Rated;
@@ -149,6 +156,7 @@ function randomMovie() {
       $("#movieinfosection").append(pTwo);
       $("#movieinfosection").append(pThree);
       $("#movieinfosection").append(pFour);
+      $("#movieinfosection").append(pFive);
     } else {
       //2. If it is rated R, we check the age of the user. If the user is 18 or older:
       if (currentUserAge >= 18) {
@@ -159,6 +167,7 @@ function randomMovie() {
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
+        $("#movieinfosection").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
