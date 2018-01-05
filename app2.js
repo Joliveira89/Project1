@@ -39,9 +39,15 @@ $(document).ready(function() {
 
 var omdbKey = "f2ddb033";
 var rating;
+var randomMovieRating;
+var currentUserAge;
 
 
 function returnMovie() {
+
+  $("#likebutton").show();
+  $("#dislikebutton").show();
+  $("#next").hide();
   // Grab the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
   var currentUserEmail = $("#current-user-email").attr("current-user-email");
@@ -68,6 +74,8 @@ function returnMovie() {
     var pThree = $("<p>").text("Runtime: " + runtime);
     rating = response.Rated;
     var pFour = $("<p>").text("Rating: " + rating);
+    var plot = response.Plot;
+    var pFive = $("<p>").text("Plot: " + plot);
 
     //Check Age:
     //1. First, we check if the movie is not rated R
@@ -78,6 +86,7 @@ function returnMovie() {
       $("#movieinfosection").append(pTwo);
       $("#movieinfosection").append(pThree);
       $("#movieinfosection").append(pFour);
+      $("#movieinfosection").append(pFive);
     }else{
       //2. If it is rated R, we check the age of the user. If the user is 18 or older:
       if (currentUserAge >= 18) {
@@ -87,12 +96,20 @@ function returnMovie() {
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
+        $("#movieinfosection").append(pFive);
       }else{
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
+<<<<<<< HEAD
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep</h1>");
+=======
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep ")
+        $("#likebutton").hide();
+        $("#dislikebutton").hide();
+        $("#next").show();
+>>>>>>> master
       }
     }
 
@@ -122,6 +139,7 @@ function returnMovie() {
         $("#movieinfosection").empty();
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");
+
       }
     };
   })
@@ -134,16 +152,27 @@ function returnMovie() {
   var dislikedMoviesArray;
   var likedMoviesArray;
 
+<<<<<<< HEAD
   function randomMovie() {
     // Get the current user's age:
     var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
     var currentUserEmail = $("#current-user-email").attr("current-user-email");
     
+=======
+function randomMovie() {
+
+  $("#likebutton").show();
+  $("#dislikebutton").show();
+  $("#next").hide();
+  // Get the current user's age:
+  var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
+  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
+>>>>>>> master
 
     $("#postersection").empty();
     $("#movieinfosection").empty();
 
-  var imdbTop = Math.floor(Math.random() * 10);
+  var imdbTop = Math.floor(Math.random() * 15);
   console.log(movieList[imdbTop]);
   var queryURLBase = "https://www.omdbapi.com/?t=" + movieList[imdbTop].name + "&apikey=" + omdbKey;
 
@@ -160,11 +189,18 @@ function returnMovie() {
     var pThree = $("<p>").text("Runtime: " + runtime);
     rating = response.Rated;
     var pFour = $("<p>").text("Rating: " + rating);
+    var plot = response.Plot;
+    var pFive = $("<p>").text("Plot: " + plot);
     $("#postersection").append(pOne);
     $("#movieinfosection").append(pTwo);
     $("#movieinfosection").append(pThree);
     $("#movieinfosection").append(pFour);
+<<<<<<< HEAD
   
+=======
+    $("#movieinfosection").append(pFive);
+
+>>>>>>> master
 
     randomMovieRating = response.Rated;
     var pFour = $("<p>").text("Rating: " + randomMovieRating);
@@ -179,6 +215,7 @@ function returnMovie() {
       $("#movieinfosection").append(pTwo);
       $("#movieinfosection").append(pThree);
       $("#movieinfosection").append(pFour);
+      $("#movieinfosection").append(pFive);
     } else {
       //2. If it is rated R, we check the age of the user. If the user is 18 or older:
       if (currentUserAge >= 18) {
@@ -189,15 +226,23 @@ function returnMovie() {
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
+        $("#movieinfosection").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console.log
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");
+        $("#likebutton").hide();
+        $("#dislikebutton").hide();
+        $("#next").show();
       }
     };
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   var queryURLYoutube = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80&maxResults=1&q=" + movieList[imdbTop].name + " trailer";
 
     $.ajax({
@@ -215,8 +260,12 @@ function returnMovie() {
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
+<<<<<<< HEAD
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");
 
+=======
+        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
+>>>>>>> master
       }
       //console.log(response);
     });
@@ -244,7 +293,15 @@ function returnMovie() {
 
   $(document).on("click", ".input-group-addon", returnMovie);
 
+<<<<<<< HEAD
   // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
+=======
+//Testing Area for Baraka
+$(document).on("click", "#dislikebutton", randomMovie);
+$(document).on("click", "#likebutton", randomMovie);
+$(document).on("click", "#next", randomMovie);
+
+>>>>>>> master
 
   //Testing Area for Baraka
   $(document).on("click", "#dislikebutton", randomMovie);
@@ -269,12 +326,12 @@ function returnMovie() {
       database.ref().update({ "dislikedMovies": dislikedMoviesArray});
     }
 
-  $(document).on("click", ".input-group-addon", returnMovie);
 
   // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
 
   //Testing Area for Baraka
 var movieList = [
+<<<<<<< HEAD
   {name: "The Shawshank Redemption", rating: "R"},
   {name: "The Godfather", rating: "R"},
   {name: "The Godfather: Part II", rating: "PG-13"},
@@ -287,6 +344,39 @@ var movieList = [
   {name: "Fight Club", rating: "R"}
 ]
 });
+=======
+{name: "The Shawshank Redemption",
+rating: "R"},
+{name: "The Godfather",
+rating: "R"},
+{name: "The Godfather: Part II",
+rating: "PG-13"},
+{name: "The Dark Knight",
+rating: "R"},
+{name: "12 Angry Men",
+rating: "A"},
+{name: "Schindler's List",
+rating: "R"},
+{name: "Pulp Fiction",
+rating: "R"},
+{name: "The Lord of the Rings: The Return of the King",
+rating: "PG-13"},
+{name: "The Good, the Bad and the Ugly",
+rating: "R"},
+{name: "Fight Club",
+rating: "R"},
+{name: "The Lord of the Rings: The Fellowship of the Ring",
+rating: "PG-13"},
+{name: "Forrest Gump",
+rating: "PG-13"},
+{name: "Inception",
+rating: "PG-13"},
+{name: "Spirited Away",
+rating: "PG"},
+{name: "Life Is Beautiful",
+rating: "PG-13"}
+];
+>>>>>>> master
 
 
 
