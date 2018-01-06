@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var omdbKey = "f2ddb033";  
+  var omdbKey = "f2ddb033";
   // Create empty arrays to store the liked and disliked movies from firebase
   var likedMoviesArray = [];
   var dislikedMoviesArray = [];
@@ -22,8 +22,8 @@ $(document).ready(function() {
         if (element[0] != "") {
           $("#likedMovies").append("<li>" + element[0] + "</li>");
         }
-        
-      }      
+
+      }
     });
     // Append movies from the dislikedMoviesArray to the DOM in the playlist page
     dislikedMoviesArray.forEach(element => {
@@ -32,7 +32,7 @@ $(document).ready(function() {
         if (element[0] != "") {
           $("#dislikedMovies").append("<li>" + element[0] + "</li>");
         }
-        
+
       }
     });
   });
@@ -206,7 +206,7 @@ function randomMovie() {
         //We show everything else
         $("#movieinfosection").empty();
         // $("#movieinfosection").append($("<p id='title'>").text("Title: " + response.Title));
-        $("#postersection").append(pOne);      
+        $("#postersection").append(pOne);
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
@@ -247,23 +247,23 @@ function randomMovie() {
 
     // Save Movie Title to Firebase based on like or dislike
     //Get the id of the clicked button:
-    var clickedButton = this.id;  
+    var clickedButton = this.id;
     //alert(movieName);
     if (clickedButton === "likebutton") {
       console.log(`You liked ${randomMovieName}`);
-      console.log("The current email is " + currentUserEmail);    
-      database = firebase.database();        
+      console.log("The current email is " + currentUserEmail);
+      database = firebase.database();
       likedMoviesArray.push([randomMovieName, currentUserEmail]);
-      database.ref().update({ "likedMovies": likedMoviesArray});    
+      database.ref().update({ "likedMovies": likedMoviesArray});
     }
 
     if (clickedButton === "dislikebutton") {
       console.log(`You DISLIKED ${randomMovieName}`);
       database = firebase.database();
       dislikedMoviesArray.push([randomMovieName, currentUserEmail]);
-      database.ref().update({ "dislikedMovies": dislikedMoviesArray}); 
+      database.ref().update({ "dislikedMovies": dislikedMoviesArray});
     }
-    
+
   }
 
   $(document).on("click", ".input-group-addon", returnMovie);
@@ -275,8 +275,6 @@ $(document).on("click", "#next", randomMovie);
 
 
   //Testing Area for Baraka
-  $(document).on("click", "#dislikebutton", randomMovie);
-  $(document).on("click", "#likebutton", randomMovie);
   // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
     // Save Movie Title to Firebase based on like or dislike
     //Get the id of the clicked button:
