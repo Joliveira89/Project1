@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<html>
+<head>
+	<meta charset="utf-8">
+	<!-- viewport tag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FilmHunt PLaylist</title>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified CSS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+		</script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous">
+		</script>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+		</script>
+
+	 	<!-- Firebase script -->
+		<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js">
+		</script>
+
+		<script type="text/javascript" src="./assets/js/auth.js">
+		</script>
+
+		<!-- Baraka's JS -->
+		<!-- <script type="text/javascript" src="./assets/js/auth.js"></script> -->
+		<script type="text/javascript" src="./js/app2.js">
+		</script>
+
+		<!-- Moment.js library -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js">
+		</script>
+
+		<!-- our stylesheet link -->
+	 	<link rel="stylesheet" type="text/css" href="./css/style1.css">
+</head>
+<!-- =================================== -->
+<body>
+	<header>
+  	<div class="container" id = "headerbg">
+   		<form role="form" class="row">
+   			<!-- ===================================== -->
+   			<div class="col-xs-3" id="logoimg">
+   				<img class="image-responsive" src="./img/logo_5.png">
+   				</img>
+   			</div><!-- logoimg -->
+   			<!-- ===================================== -->
+   			<div class="col-xs-3"></div>
+   			<!-- ===================================== -->
+    		<div class="form-group col-xs-5">
+	        <label for="code"></label>
+	        <div class="input-group" id="searchinput">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-search">
+							</span>
+   					</div>
+	        <input type="text" class="form-control">
+	      	</div>
+	        <!-- <img class="image-responsive" src="./img/front_page.png"> -->
+    		</div><!-- form-group -->
+    		<!-- ===================================== -->
+			</form>
+
+  	</div><!-- container -->
+  </header>
+	<!-- ============================================================== -->
+	<section class="container" id="librarysection">
+		<h1>
+			LIBRARY
+		</h1>
+		<div id="likedMovies">
+		<!-- 	<img class="image-responsive" src=">
+		</div>
+		<div class="col-sm-4">
+			<img class="image-responsive" src="./img/terminator.jpg">
+   		</img>
+		</div>
+		<div class="col-sm-4">
+			<img class="image-responsive" src="./img/terminator.jpg">
+   		</img>
+		</div>
+		<div class="col-sm-4">
+			<img class="image-responsive" src="./img/terminator.jpg">
+   		</img> -->
+		</div>
+	</section><!-- librarysection -->
+	<!-- ============================================================== -->
+	<section class="container" id="mainsectionarea">
+		<!-- <div class= "col-sm-4" id = "postersection">
+			<img class="image-responsive" src="./img/starwars_poster.jpg">
+   		</img>
+		</div><! postersection -->
+		<div class = "col-sm-8" id = "movieinfosection">
+			<h1>
+				MOVIE INFO SECTION
+			</h1>
+		</div><!-- movieinfosection -->
+		<img class="image-responsive" src="./img/itunesbutton.png">
+	   </img>
+	</section><!-- moviedescription -->
+
+	<span id= "current-user-age"></span>
+	<span id= "current-user-email"></span>
+	<!-- ============================================================== -->
+	<footer class="container-fluid">
+		<p>
+			@Copyright 2017
+		</p>
+		<img class="image-responsive" src="./img/front_page.png">
+   	</img>
+	</footer>
+	<!-- ============================================================== -->
+</body>
+</html>

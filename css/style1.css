@@ -1,0 +1,74 @@
+body{
+	background-color: black;
+}
+
+#headerbg
+{
+	display: block;
+	width: auto;
+  	height: auto;
+	/*background-image: url("../img/header.png");*/
+	background-color: black;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+img{
+	width:200px;
+}
+footer
+{
+	background-color:#21618C;
+	padding: 10px;	
+	color:white;
+	text-align: center;
+}
+#text-color
+{
+	color:white;
+}
+#danger-color
+{
+	color:red;
+}
+.form-group
+{
+	color: white;
+}
+#librarysection
+{
+	height: 500px;
+	color: white;
+}
+#trailersection,
+#mainsectionarea
+{
+	background-color: black;
+	/*height: 50vh;*/
+	/*padding:20px;*/
+}
+#movieinfosection
+{
+	color:white;
+}
+#likebutton,
+#dislikebutton
+{
+	background-color: green;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	/*height:30px;
+	margin:10px;*/
+}
+#btnLogin
+{
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: green;
+}
+.textstyle
+{
+	color:black;
+}
