@@ -155,7 +155,7 @@ function randomMovie() {
   $("#next").hide();
   // Get the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
-  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
+  var currentUserEmail = $("#current-user-email").attr("current-user-email");
 
     $("#postersection").empty();
     $("#movieinfosection").empty();
