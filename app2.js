@@ -275,8 +275,6 @@ $(document).on("click", "#next", randomMovie);
 
 
   //Testing Area for Baraka
-  $(document).on("click", "#dislikebutton", randomMovie);
-  $(document).on("click", "#likebutton", randomMovie);
   // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
     // Save Movie Title to Firebase based on like or dislike
     //Get the id of the clicked button:
