@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var omdbKey = "f2ddb033";  
+  var omdbKey = "f2ddb033";
   // Create empty arrays to store the liked and disliked movies from firebase
   var likedMoviesArray = [];
   var dislikedMoviesArray = [];
@@ -10,32 +10,40 @@ $(document).ready(function() {
   // Call the database to render to the HTML
   database.ref().on("value", function (snap) {
     // Get the current user's email from the DOM: This was added by auth.js during login
-    var currentUserEmail = $("#current-user-email").attr("current-user-email");
+    // var currentUserEmail = $("#current-user-email").attr("current-user-email");
+    var currentUser = firebase.auth().currentUser;
+    var currentUserEmail = currentUser.email;
     // Update the likedMoviesArray and dislikedMoviesArray using firebase data
     likedMoviesArray = snap.val().likedMovies;
     dislikedMoviesArray = snap.val().dislikedMovies;
-
+    // console.log(currentUserEmail);
     // Append movies from the likedMoviesArray to the DOM in the playlist page
     likedMoviesArray.forEach(element => {
+      // console.log(currentUserEmail);
       //Only append movies where the second element matches the email of the currently logged in user
-      if (element[1] == currentUserEmail) {
+      if (element[2] == currentUserEmail) {
         if (element[0] != "") {
-          $("#likedMovies").append("<li>" + element[0] + "</li>");
+
+          $("#likedMovies").append('<div class="col-sm-4"> <img src="'+ element[1] + '" class="image-responsive"/></div>');
         }
-        
-      }      
-    });
-    // Append movies from the dislikedMoviesArray to the DOM in the playlist page
-    dislikedMoviesArray.forEach(element => {
-      //Only append movies where the second element matches the email of the currently logged in user
-      if (element[1] == currentUserEmail) {
-        if (element[0] != "") {
-          $("#dislikedMovies").append("<li>" + element[0] + "</li>");
-        }
-        
+
       }
     });
+    // Append movies from the dislikedMoviesArray to the DOM in the playlist page
+    // dislikedMoviesArray.forEach(element => {
+    //   //Only append movies where the second element matches the email of the currently logged in user
+    //   if (element[1] == currentUserEmail) {
+    //     if (element[0] != "") {
+    //       $("#dislikedMovies").append("<li>" + element[0] + "</li>");
+    //     }
+
+    //   }
+    // });
   });
+
+  // $("#likedMovies").click(function(){
+  //   $("#dislikedMovies").text("<li>" + element[0] + "</li>");
+  // });
 
 var omdbKey = "f2ddb033";
 var rating;
@@ -49,10 +57,10 @@ function returnMovie() {
   $("#dislikebutton").show();
   $("#next").hide();
   // Grab the current user's age:
-  var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
+  currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
   var currentUserEmail = $("#current-user-email").attr("current-user-email");
   // Grab the search term:
-  var searchTerm = $("#userinputsearch").val().trim();
+  var searchTerm = $(".form-control").val().trim();
   // Create the query:
   var queryURLBase = "https://www.omdbapi.com/?t=" + searchTerm + "&apikey=" + omdbKey;
 
@@ -102,7 +110,7 @@ function returnMovie() {
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep ")
+        $("#movieinfosection").css("background", "black").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R. Keep ")
         $("#likebutton").hide();
         $("#dislikebutton").hide();
         $("#next").show();
@@ -123,18 +131,18 @@ function returnMovie() {
     //1. First, we check if the movie is not rated R
     if (rating != "R") {
       //If not, we show everything
-      $("#postersection").append(pFive);
+      $("#trailer").append(pFive);
     } else {
       //2. If it is rated R, we check the age of the user. If the user is 18 or older:
       if (currentUserAge >= 18) {
         //We show everything else
-        $("#postersection").append(pFive);
+        $("#trailer").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console
         //console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");
+        $("#movieinfosection").css("background", "black").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");
 
       }
     };
@@ -142,6 +150,7 @@ function returnMovie() {
 };
 
   var randomMovieName;
+  var randomMoviePoster;
   if (randomMovieName == undefined) {
     randomMovieName = '';
   }
@@ -153,9 +162,11 @@ function randomMovie() {
   $("#likebutton").show();
   $("#dislikebutton").show();
   $("#next").hide();
+
   // Get the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
   var currentUserEmail = $("#current-user-email").attr("current-user-email");
+  console.log(currentUserAge);
 
     $("#postersection").empty();
     $("#movieinfosection").empty();
@@ -189,9 +200,11 @@ function randomMovie() {
     randomMovieRating = response.Rated;
     var pFour = $("<p>").text("Rating: " + randomMovieRating);
     randomMovieName = response.Title;
+    randomMoviePoster = response.Poster;
     //Check Age:
     //1. First, we check if the movie is not rated R
     if (randomMovieRating != "R") {
+      console.log(randomMovieName);
       //If not, we show everything
       $("#movieinfosection").empty();
       // $("#movieinfosection").append($("<p id='title'>").text("Title: " + response.Title));
@@ -206,7 +219,7 @@ function randomMovie() {
         //We show everything else
         $("#movieinfosection").empty();
         // $("#movieinfosection").append($("<p id='title'>").text("Title: " + response.Title));
-        $("#postersection").append(pOne);      
+        $("#postersection").append(pOne);
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
@@ -216,7 +229,7 @@ function randomMovie() {
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");
+        $("#movieinfosection").css("background", "black").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1>");
         $("#likebutton").hide();
         $("#dislikebutton").hide();
         $("#next").show();
@@ -234,39 +247,46 @@ function randomMovie() {
       //1. First, we check if the movie is not rated R
       if (randomMovieRating != "R") {
         //If not, we show everything
-        $("#postersection").append(pFive);
-      } else {
+        $("#trailer").append(pFive);
+      } else if (randomMovieRating === "R" && currentUserAge >= 18) {
+        $("#trailer").append(pFive);
+      }
+        else {
         //Else, we show a modal: TODO//Create a modal and replace with console
         console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
-        $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
+        $("#movieinfosection").css("background", "black").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
+        $("#trailer").empty();
       }
       //console.log(response);
     });
 
     // Save Movie Title to Firebase based on like or dislike
     //Get the id of the clicked button:
-    var clickedButton = this.id;  
+    var clickedButton = this.id;
     //alert(movieName);
     if (clickedButton === "likebutton") {
       console.log(`You liked ${randomMovieName}`);
-      console.log("The current email is " + currentUserEmail);    
-      database = firebase.database();        
-      likedMoviesArray.push([randomMovieName, currentUserEmail]);
-      database.ref().update({ "likedMovies": likedMoviesArray});    
+      console.log("The current email is " + currentUserEmail);
+      database = firebase.database();
+      likedMoviesArray.push([randomMovieName, randomMoviePoster, currentUserEmail]);
+      database.ref().update({ "likedMovies": likedMoviesArray});
     }
 
     if (clickedButton === "dislikebutton") {
       console.log(`You DISLIKED ${randomMovieName}`);
       database = firebase.database();
-      dislikedMoviesArray.push([randomMovieName, currentUserEmail]);
-      database.ref().update({ "dislikedMovies": dislikedMoviesArray}); 
+      dislikedMoviesArray.push([randomMovieName, randomMoviePoster, currentUserEmail]);
+      database.ref().update({ "dislikedMovies": dislikedMoviesArray});
     }
-    
+
   }
 
-  $(document).on("click", ".input-group-addon", returnMovie);
+  $(document).on("click", ".glyphicon-search", returnMovie);
+  $(".glyphicon-search").click(function() {
+    console.log($("#searchinput").val().trim());
+  });
 
 //Testing Area for Baraka
 $(document).on("click", "#dislikebutton", randomMovie);
@@ -284,7 +304,7 @@ $(document).on("click", "#next", randomMovie);
       console.log(`You liked ${randomMovieName}`);
       console.log("The current email is " + currentUserEmail);
       database = firebase.database();
-      likedMoviesArray.push([randomMovieName, currentUserEmail]);
+      likedMoviesArray.push([randomMovieName,  currentUserEmail]);
       database.ref().update({ "likedMovies": likedMoviesArray});
     }
 

@@ -1,153 +1,175 @@
 <!DOCTYPE html>
+<html lang="en-us">
 <html>
 <head>
-	<title>Freebay homepage</title>
+	<meta charset="utf-8">
+	<!-- viewport tag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>bootstrap project1</title>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<!-- Latest compiled and minified CSS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+		</script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous">
+		</script>
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+		</script>
 
-	<link rel="stylesheet" type="text/css" href="./style.css">
+	 	<!-- Firebase script -->
+		<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js">
+		</script>
 
-	<!-- Firebase script -->
-	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+		<!-- Baraka's JS -->
+		<script type="text/javascript" src="./assets/js/auth.js"></script>
+		<script type="text/javascript" src="./js/app2.js">
+		</script>
 
-	<!-- Baraka's JS -->
-	<script type="text/javascript" src="./assets/js/auth.js"></script>
-	<script type="text/javascript" src="./app2.js"></script>
+		<!-- Moment.js library -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js">
+		</script>
 
-
-
-	<!-- Moment.js library -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
-
-
-
-
+		<!-- our stylesheet link -->
+	 	<link rel="stylesheet" type="text/css" href="./css/style1.css">
 </head>
-<body class="background">
-<!-- =========================================================================-->
-	<div class="container">
-	<!-- =====================================================================-->
-		<div class = "jumbotron hide">
-		<!-- ==================================================================-->
-			<div class = "row">
-			<!-- ==============================================================-->
-				<!-- ==========================================================-->
-				<div class = "col-md-6">
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Dropdown
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<button class="dropdown-item" type="button">Action</button>
-						<button class="dropdown-item" type="button">Another action</button>
-						<button class="dropdown-item" type="button">Something else here</button>
-						</div>
+<!-- =================================== -->
+<body>
+		<header>
+	  	<div class="container" id = "headerbg">
+	   		<form role="form" class="row">
+	   			<!-- ===================================== -->
+	   			<div class="col-xs-3" id="logoimg">
+	   				<img class="image-responsive" src="./img/logo_5.png">
+	   				</img>
+	   			</div><!-- logoimg -->
+	   			<!-- ===================================== -->
+	   			<div class="col-xs-3"></div>
+	   			<!-- ===================================== -->
+	    		<div class="form-group col-xs-5">
+		        <label for="code"></label>
+		        <div class="input-group" id="searchinput">
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-search">
+								</span>
+	   					</div>
+		        <input type="text" class="form-control">
+		      	</div>
+		        <!-- <img class="image-responsive" src="./img/front_page.png"> -->
+	    		</div><!-- form-group -->
+	    		<!-- ===================================== -->
+				</form>
 
-					</div>
+	  	</div><!-- container -->
+	  </header>
+		<!-- ============================================================== -->
+		<section class="container signinsection">
+			<div id="myModal" class="modal fade">
+	    	<div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	            <h4 class="modal-title">Welcome to FilmHunt</h4>
+	          </div><!-- modal-header -->
+	          <div class="modal-body">
+	            <form>
+	              <div class="form-group">
+	              	<label for="txtEmail" class="textstyle">Email address</label>
+	                <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
+	              </div><!-- form-group -->
+	              <div class="form-group">
+	              	<label for="txtEmail" class="textstyle">Password</label>
+	                <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+	              </div><!-- form-group -->
+	              <div class="form-group hidden ageField">
+									<label for="txtAge" class="textstyle">Age</label>
+									<input type="number" class="form-control" id="txtAge" placeholder="Age">
+								</div><!-- form-group -->
+	              <button type="submit" class="btn btn-primary btn-lg" id="btnLogin" >Login</button>
+								<button type="submit" class="btn btn-info btn-lg hidden" id="btnSignUp">Sign Up</button>
+								<span id="danger-color">Don't have an account</span>
+								<a id="create-account">Create and account</a>
+								<button type="submit" class="btn btn-secondary hide" id="btnLogout" >Log Out</button>
+								<button type="submit" class="btn btn-secondary hide" id="close"  id="Close">CLOSE</button>
+	            </form>
+	          </div><!-- modal-body -->
+	        </div><!-- modal-content -->
+	    	</div><!-- modal-dialog -->
+			</div><!-- myModal -->
+		</section>
+		<!-- ============================================================== -->
+		<!-- <section class="container signinsection">
+			<div class="row">
+				<div class="col-md-12">
+					<h1><span id="text-color">Login or Sign Up</span>
+					</h1>
+					<div class="row">
+						<div class="col-md-8 col-offset-2">
+							<div class="form-group">
+								<label for="txtEmail">Email address</label>
+								<input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
+							</div> form-group -->
+							<!-- <div class="form-group">
+								<label for="txtPassword">Password</label>
+								<input type="password" class="form-control" id="txtPassword" placeholder="Password">
+							</div> form-group -->
+							<!-- <div class="form-group hidden">
+								<label for="txtAge">Age</label>
+								<input type="number" class="form-control" id="txtAge" placeholder="Age">
+							</div> form-group -->
+							<!-- <button type="submit" class="btn btn-primary btn-lg" id="btnLogin">Login</button>
+							<span id="danger-color">Don't have an account</span>
+							<a>Create and account</a>
 
-				</div>
-				<!-- ==========================================================-->
-				<div class = "col-md-6">
-
-  					<!-- <label class="control-label " for="email">
-   						Search for your favorite movie
-  					</label> -->
-					<!-- ======================================================-->
-  					<div class="input-group">
-					<!-- ======================================================-->
-						<!-- ==================================================-->
-   						<div class="input-group-addon">
-							<span class="glyphicon glyphicon-search"></span>
-   						</div>
-						<!-- ==================================================-->
-   						<input class="form-control" id="userinputsearch" name="favoritemovie" type="text" placeholder="Favorite movie Search">
-   						</input>
-   						<!-- ==================================================-->
-   					<!-- ======================================================-->
-   	  				</div>
-					<!-- ======================================================-->
-				<!-- =========================================================-->
- 				</div><!-- closing tag for input section -->
- 			<!-- ==============================================================-->
- 			</div><!-- closing tag for row -->
-		<!-- ==================================================================-->
-		</div><!-- closing tag for jumbotron -->
-<!-- =========================================================================-->
-		<!-- ==================================================================-->
-		<div class="col-md-12 hide" id = "mainsectionarea">
-			<a href="playlist_gbm.html">Play List</a>
-
-			<div class= "col-md-4" id = "postersection">
-				<p id = "movietitle"><h1>MOVIE TITLE</h1></p>
-			</div>
-
-			<div class = "col-md-8" id = "movieinfosection">
-				MOVIE INFO SECTION
-			</div>
-
-			<div class = "col-md-6" id = "likeordislike">
-				<button class="glyphicon glyphicon-thumbs-up" id = "likebutton"></button>
-				<button class="glyphicon glyphicon-thumbs-down" id = "dislikebutton"></button>
-				<button class="glyphicon" id = "next">Next</button>
-			</div>
-		</div>
-
-		<!-- Baraka Testing Area-->
-		<!--
-			User's age will be added here but not shown to the user.
-			The value will be used when checking the user's age in the parental control
-		 -->
-		<span id="current-user-age"></span>
-		<span id="current-user-email"></span>
-
-		<div class="row">
-			<div class="col-md-12">
-
-				<h1>Login or Sign Up</h1>
-
-				<div class="row">
-					<div class="col-md-8 col-offset-2">
-						<div class="form-group">
-							<label for="txtEmail">Email address</label>
-							<input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
-						</div>
-						<div class="form-group">
-							<label for="txtPassword">Password</label>
-							<input type="password" class="form-control" id="txtPassword" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<label for="txtAge">Age</label>
-							<input type="number" class="form-control" id="txtAge" placeholder="Age">
-						</div>
-						<button type="submit" class="btn btn-info" id="btnLogin">Login</button>
-						<button type="submit" class="btn btn-action" id="btnSignUp">Sign Up</button>
-						<button type="submit" class="btn btn-secondary hide" id="btnLogout">Log Out</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-		<!-- End Baraka Testing Area-->
-<!-- =========================================================================-->
-	<!-- =====================================================================-->
-	<footer class = "footer">
+							<button type="submit" class="btn btn-secondary hide" id="btnLogout">Log Out</button> -->
+						<!-- </div> --><!-- col-md-8 -->
+					<!-- </div> --><!-- row -->
+				<!-- </div> --><!-- col-md-12 -->
+			<!-- </div> --><!-- row -->
+		<!-- </section> --><!-- signinsection -->
+		<!-- ============================================================== -->
 		<div>
+			<section class="container-fluid" id="trailersection">
+				<div class="embed-responsive embed-responsive-16by9" id="trailer">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/TYRy5bCsWF8" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+		   	</div><!-- trailer -->
+				<div class="col-md-4"></div>
+				<div class = "col-md-6 col-sm-12" id = "likeordislike">
+					<button class="btn btn-primary btn-lg glyphicon glyphicon-thumbs-up" id = "likebutton"> LIKE </button>
+					<button class="btn btn-primary btn-lg glyphicon glyphicon-thumbs-down" id = "dislikebutton"> DISLIKE </button>
+					<button class="btn btn-primary btn-lg glyphicon" id = "dislikebutton"> NEXT </button>
+					<a href="playlist.html"><button type="button" class="btn btn-primary btn-lg">PLAYLIST</button></a>
+				</div><!-- likeordislike -->
+			</section><!-- trailersection -->
+			<!-- ============================================================== -->
+			<section class="container" id="mainsectionarea">
+				<div class= "col-sm-4" id = "postersection">
+					<img class="image-responsive" src="./img/starwars_poster.jpg">
+		   		</img>
+				</div><!-- postersection -->
+				<div class = "col-sm-8" id = "movieinfosection">
+					<h1>
+						MOVIE INFO SECTION
+					</h1>
+				</div><!-- movieinfosection -->
+				<img class="image-responsive" src="./img/itunesbutton.png">
+			   </img>
+			</section><!-- moviedescription -->
+			<span id= "current-user-age"></span>
+			<span id= "current-user-email"></span>
+		</div>
+		<!-- ============================================================== -->
+		<footer class="container-fluid">
 			<p>
 				@Copyright 2017
 			</p>
-		</div>
-	</footer>
-	<!-- =====================================================================-->
-	</div> <!-- closing tag for container -->
+			<img class="image-responsive" src="./img/front_page.png">
+	   	</img>
+		</footer>
+	<!-- ============================================================== -->
 </body>
 </html>
