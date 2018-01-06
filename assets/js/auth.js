@@ -29,7 +29,7 @@ $(document).ready(function () {
 
     // Add login event
     btnLogin.click(e => {
-        console.log("LoggedIn");
+        //console.log("LoggedIn");
         
 
         //Get values
@@ -48,7 +48,7 @@ $(document).ready(function () {
                     //Remove the hidden class from the input
                     btnLogout.removeClass("hide");
                     btnSignUp.addClass("hide");
-                    console.log("The user is NOW logged in");
+                    //console.log("The user is NOW logged in");
 
                     //Get the user's age from the db
 
@@ -67,33 +67,33 @@ $(document).ready(function () {
 
                             if (childSnapshot.val().email === currentUserEmail) {
                                 if (childSnapshot.val().age >= 18) {
-                                    console.log("The user is over 18");
+                                    //console.log("The user is over 18");
                                     // $(".jumbotron, .mainsectionarea").removeClass("hide");
                                     //$("#current-user-age").text(childSnapshot.val().age);
                                     $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
                                     $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
                                 } else {
-                                    console.log("The user is NOT 18 yet");
+                                    //console.log("The user is NOT 18 yet");
                                     //Add the 'current-user-age' attribute to the span, to be used when the user searches for movies in the app2.js
                                     $("#current-user-age").attr("current-user-age", childSnapshot.val().age);
                                     $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
                                 }
                             }
                         });
-                        console.log("CURRENT USER'S EMAIL ADDRESS IS: " + currentUserEmail);
+                        //console.log("CURRENT USER'S EMAIL ADDRESS IS: " + currentUserEmail);
                     }
                     //console.log("CURRENT USER'S EMAIL ADDRESS IS: " + firebaseUser.Aa.ca.email);
 
                 } else {
-                    console.log("The user is not logged in");
+                    //console.log("The user is not logged in");
                     btnLogout.addClass("hide");
                     btnSignUp.removeClass("hide");
                 }
             })
             .catch(function (e) {
                 //Show message if we couldn't authenticate
-                console.log(e.message);
-                console.log("SORRY, WE COULDN'T SIGN YOU IN. CHECK YOUR EMAIL OR PASSWORD");
+                //console.log(e.message);
+                //console.log("SORRY, WE COULDN'T SIGN YOU IN. CHECK YOUR EMAIL OR PASSWORD");
             });
         $(".form-control").val("");
 
@@ -105,7 +105,7 @@ $(document).ready(function () {
     btnSignUp.click(e => {
         
 
-        console.log("Sign Up Button Clicked");
+        // console.log("Sign Up Button Clicked");
 
         //Get values
         const email = txtEmail.val();
@@ -116,13 +116,13 @@ $(document).ready(function () {
         //TODO: Make sure the email is validated
         const auth = firebase.auth();
         const promise = auth.createUserWithEmailAndPassword(email, password);
-        console.log(email);
+        //console.log(email);
         promise
             .then(function (firebaseUser) {
                 //console.log(firebaseUser);
                 if (firebaseUser) {
-                    console.log(firebaseUser);
-                    console.log("User successfully signup!");
+                    //console.log(firebaseUser);
+                    //console.log("User successfully signup!");
                     //Remove the hidden class from the input
                     btnLogout.removeClass("hide");
                     btnSignUp.addClass("hide");
@@ -134,12 +134,13 @@ $(document).ready(function () {
                         email: email,
                         age: parseInt(age)
                     });
+                    console.log('Data added to database');
 
                     // Get the user's Age
 
                     //Check if user is over 18 and show them the needed info
                 } else {
-                    console.log("There was an error signing up the user!");
+                    //console.log("There was an error signing up the user!");
                     btnLogout.addClass("hide");
                     btnSignUp.removeClass("hide");
                 }
@@ -147,8 +148,8 @@ $(document).ready(function () {
                 $(".form-control").val("");
             })
             .catch(function (e) {
-                console.log("FIREBASE MESSAGE: " + e.message);
-                console.log("MY MESSAGE: There was an error signing up the user- SECOND ERROR!");
+                //console.log("FIREBASE MESSAGE: " + e.message);
+                //console.log("MY MESSAGE: There was an error signing up the user- SECOND ERROR!");
             });
 
         
@@ -158,7 +159,7 @@ $(document).ready(function () {
     // Add Logout event
     btnLogout.click(e => {
         //This will signout the currently authenticated user
-        console.log("Sing Out");
+        //console.log("Sing Out");
         btnLogout.addClass("hide");
         btnSignUp.removeClass("hide");
         firebase.auth().signOut();
@@ -184,10 +185,14 @@ $(document).ready(function () {
 
                     if (childSnapshot.val().email === currentUserEmail) {
                         if (childSnapshot.val().age >= 18) {
-                            console.log("The user is LOGGED IN and is over 18");
+                            //console.log("The user is LOGGED IN and is over 18");
+                            $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
+                            $("#email").text(childSnapshot.val().email);
 
                         } else {
-                            console.log("The user is LOGGED IN and is NOT 18 yet");
+                            //console.log("The user is LOGGED IN and is NOT 18 yet");
+                            $("#current-user-email").attr("current-user-email", childSnapshot.val().email);
+                            $("#email").text(childSnapshot.val().email);
                         }
                     }
                 });
@@ -198,7 +203,7 @@ $(document).ready(function () {
             btnLogout.removeClass("hide");
             btnSignUp.addClass("hide");
         } else {
-            console.log("The user is not logged in, showing Login or Logout Section");
+            //console.log("The user is not logged in, showing Login or Logout Section");
         }
     });
 

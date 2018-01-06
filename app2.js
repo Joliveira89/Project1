@@ -1,7 +1,47 @@
+$(document).ready(function() {
+
+  var omdbKey = "f2ddb033";  
+  // Create empty arrays to store the liked and disliked movies from firebase
+  var likedMoviesArray = [];
+  var dislikedMoviesArray = [];
+
+  // Create a database
+  var database = firebase.database();
+  // Call the database to render to the HTML
+  database.ref().on("value", function (snap) {
+    // Get the current user's email from the DOM: This was added by auth.js during login
+    var currentUserEmail = $("#current-user-email").attr("current-user-email");
+    // Update the likedMoviesArray and dislikedMoviesArray using firebase data
+    likedMoviesArray = snap.val().likedMovies;
+    dislikedMoviesArray = snap.val().dislikedMovies;
+
+    // Append movies from the likedMoviesArray to the DOM in the playlist page
+    likedMoviesArray.forEach(element => {
+      //Only append movies where the second element matches the email of the currently logged in user
+      if (element[1] == currentUserEmail) {
+        if (element[0] != "") {
+          $("#likedMovies").append("<li>" + element[0] + "</li>");
+        }
+        
+      }      
+    });
+    // Append movies from the dislikedMoviesArray to the DOM in the playlist page
+    dislikedMoviesArray.forEach(element => {
+      //Only append movies where the second element matches the email of the currently logged in user
+      if (element[1] == currentUserEmail) {
+        if (element[0] != "") {
+          $("#dislikedMovies").append("<li>" + element[0] + "</li>");
+        }
+        
+      }
+    });
+  });
+
 var omdbKey = "f2ddb033";
 var rating;
 var randomMovieRating;
 var currentUserAge;
+
 
 function returnMovie() {
 
@@ -10,7 +50,7 @@ function returnMovie() {
   $("#next").hide();
   // Grab the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
-  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
+  var currentUserEmail = $("#current-user-email").attr("current-user-email");
   // Grab the search term:
   var searchTerm = $("#userinputsearch").val().trim();
   // Create the query:
@@ -25,7 +65,7 @@ function returnMovie() {
     url: queryURLBase,
     method: "GET"
   }).done(function(response) {
-    console.log(response);
+    //console.log(response);
     var poster = response.Poster;
     var pOne = $("<img>").attr("src", poster);
     var actors = response.Actors;
@@ -91,19 +131,22 @@ function returnMovie() {
         $("#postersection").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console
-        console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
+        //console.log("You are younger than 18, we can't show you the result as the movie is rated R.");
         $("#movieinfosection").empty();
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you the result as the movie is rated R.</h1>");
 
       }
     };
-    console.log(response);
-    console.log(video);
   })
 };
 
-var randomMovieName;
+  var randomMovieName;
+  if (randomMovieName == undefined) {
+    randomMovieName = '';
+  }
+  var dislikedMoviesArray;
+  var likedMoviesArray;
 
 function randomMovie() {
 
@@ -112,10 +155,10 @@ function randomMovie() {
   $("#next").hide();
   // Get the current user's age:
   var currentUserAge = parseInt($("#current-user-age").attr("current-user-age"));
-  var currentUserEmail = parseInt($("#current-user-email").attr("current-user-email"));
+  var currentUserEmail = $("#current-user-email").attr("current-user-email");
 
-  $("#postersection").empty();
-  $("#movieinfosection").empty();
+    $("#postersection").empty();
+    $("#movieinfosection").empty();
 
   var imdbTop = Math.floor(Math.random() * 15);
   console.log(movieList[imdbTop]);
@@ -163,7 +206,7 @@ function randomMovie() {
         //We show everything else
         $("#movieinfosection").empty();
         // $("#movieinfosection").append($("<p id='title'>").text("Title: " + response.Title));
-        $("#postersection").append(pOne);
+        $("#postersection").append(pOne);      
         $("#movieinfosection").append(pTwo);
         $("#movieinfosection").append(pThree);
         $("#movieinfosection").append(pFour);
@@ -180,23 +223,17 @@ function randomMovie() {
       }
     };
   });
-
   var queryURLYoutube = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80&maxResults=1&q=" + movieList[imdbTop].name + " trailer";
 
-  $.ajax({
-    url: queryURLYoutube,
-    method: "GET"
-  }).done(function(response) {
-    var video = "https://www.youtube.com/embed/" + response.items[0].id.videoId;
-    var pFive = $("<iframe>").attr("src", video);
-    //1. First, we check if the movie is not rated R
-    if (randomMovieRating != "R") {
-      //If not, we show everything
-      $("#postersection").append(pFive);
-    } else {
-      //2. If it is rated R, we check the age of the user. If the user is 18 or older:
-      if (currentUserAge >= 18) {
-        //We show everything else
+    $.ajax({
+      url: queryURLYoutube,
+      method: "GET"
+    }).done(function(response) {
+      var video = "https://www.youtube.com/embed/" + response.items[0].id.videoId;
+      var pFive = $("<iframe>").attr("src", video);
+      //1. First, we check if the movie is not rated R
+      if (randomMovieRating != "R") {
+        //If not, we show everything
         $("#postersection").append(pFive);
       } else {
         //Else, we show a modal: TODO//Create a modal and replace with console
@@ -205,25 +242,31 @@ function randomMovie() {
         $("#postersection").empty();
         $("#movieinfosection").css("background", "#fafafa").html("<h1>You are younger than 18, we can't show you this random movie as it is rated R. Keep HUNTING</h1></h1>");
       }
-    }
-    console.log(response);
-  });
-}
+      //console.log(response);
+    });
 
-  // Save Movie Title to Firebase based on like or dislike
-  //Get the id of the clicked button:
-  var clickedButton = this.id;
-  //alert(movieName);
-  if (clickedButton === "likebutton") {
-    console.log(`You liked ${randomMovieName}`);
-  } else {
-    console.log(`You DISLIKED ${randomMovieName}`);
+    // Save Movie Title to Firebase based on like or dislike
+    //Get the id of the clicked button:
+    var clickedButton = this.id;  
+    //alert(movieName);
+    if (clickedButton === "likebutton") {
+      console.log(`You liked ${randomMovieName}`);
+      console.log("The current email is " + currentUserEmail);    
+      database = firebase.database();        
+      likedMoviesArray.push([randomMovieName, currentUserEmail]);
+      database.ref().update({ "likedMovies": likedMoviesArray});    
+    }
+
+    if (clickedButton === "dislikebutton") {
+      console.log(`You DISLIKED ${randomMovieName}`);
+      database = firebase.database();
+      dislikedMoviesArray.push([randomMovieName, currentUserEmail]);
+      database.ref().update({ "dislikedMovies": dislikedMoviesArray}); 
+    }
+    
   }
 
-
-$(document).on("click", ".input-group-addon", returnMovie);
-
-// youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
+  $(document).on("click", ".input-group-addon", returnMovie);
 
 //Testing Area for Baraka
 $(document).on("click", "#dislikebutton", randomMovie);
@@ -231,6 +274,10 @@ $(document).on("click", "#likebutton", randomMovie);
 $(document).on("click", "#next", randomMovie);
 
 
+  //Testing Area for Baraka
+  $(document).on("click", "#dislikebutton", randomMovie);
+  $(document).on("click", "#likebutton", randomMovie);
+  // youtube key = AIzaSyC45ynEdLhjV2bjYjpFRLPA2vtD89f3m80
     // Save Movie Title to Firebase based on like or dislike
     //Get the id of the clicked button:
     var clickedButton = this.id;
@@ -286,6 +333,7 @@ rating: "PG"},
 {name: "Life Is Beautiful",
 rating: "PG-13"}
 ];
+});
 
 
 
