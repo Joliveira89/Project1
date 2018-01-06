@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PlayList</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <!-- Firebase script -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <!-- Baraka's JS -->
+    <script type="text/javascript" src="./assets/js/auth.js"></script>
+    <script type="text/javascript" src="./app2.js"></script>
+    <!-- Moment.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.4/moment.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">   
+        
+        <span id="current-user-age"></span>
+        <span id="current-user-email"></span>
+
+        <ul class="nav nav-tabs">
+           
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Playlist for  
+                    <span id="email"></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html" id="btnLogout">Log Out</a>
+            </li>
+            
+        </ul>
+
+        <br>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Liked Movies</h2>
+            </div>
+            <div class="card-block">
+                <div id="likedMovies"></div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Disliked Movies</h2>
+            </div>
+            <div class="card-block">
+                <div id="dislikedMovies"></div>
+            </div>
+        </div> 
+       
+    </div>
+
+</body>
+
+</html>
